@@ -4,6 +4,8 @@ import com.hospital.patients.model.PatientModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 @Service
 public class PatientService {
 
@@ -11,6 +13,12 @@ public class PatientService {
     private PatientModel patientModel;
 
     public String printName(String name){
-        return patientModel.getPatientFromDatabase().toUpperCase();
+        String n = patientModel.getNames()
+                .stream()
+                .filter(i->i == name)
+                .findAny()
+                .orElse("Nothing");
+
+return n.toUpperCase();
     }
 }
